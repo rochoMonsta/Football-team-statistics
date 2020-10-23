@@ -1,0 +1,355 @@
+﻿<Page x:Class="Footbal_team_wpf.Pages.FootbalStatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Footbal_team_wpf.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1100"
+      Title="FootbalStatisticsPage">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <ControlTemplate x:Key="RoundedButtonStyle" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="true">
+                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsDefaulted" Value="true">
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#4c1bc2"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#4c1bc2"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" TargetName="border" Value="#3b1499"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="#3b1499"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                    <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <Border>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#506587" Offset="0.6"/>
+                    <GradientStop Color="#524eba" Offset="0.9"/>
+                    <GradientStop Color="#726edb" Offset="0.2"/>
+                    <GradientStop Color="#7846f0" Offset="0.1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="15">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel>
+                    <Image Source="/Resources/football.png" Width="180"
+                       Margin="20" HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                    </Image>
+                </StackPanel>
+                <Button Template="{DynamicResource RoundedButtonStyle}" 
+                        Content="Open Json File"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="45"
+                        Width="150"
+                        Margin="15, 15, 15, 0"
+                        Background="#7846f0"
+                        Foreground="White"
+                        FontFamily="Arial"
+                        FontWeight="Light"
+                        FontSize="16"
+                        Click="OpenJsonFile">
+                </Button>
+            </StackPanel>
+            <Label HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   Width="600"
+                   Content="Season"
+                   Foreground="White"
+                   FontFamily="Arial"
+                   FontSize="16"
+                   Margin="20"
+                   x:Name="SeasonNameLabel">
+
+            </Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20, 0, 20, 20">
+                <StackPanel Orientation="Vertical" Margin="5" Width="325">
+                    <Label Content="Найбільша кількість забитих голів"
+                           FontFamily="Arial"
+                           FontSize="16"
+                           Foreground="White"
+                           FontWeight="Light"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center">
+
+                    </Label>
+                    <StackPanel Background="Black" Opacity="0.5" Orientation="Vertical">
+                        <Label Content=""
+                               x:Name="TeamNameLabel1"
+                               Foreground="White"
+                               FontFamily="Arial"
+                               FontSize="14"
+                               FontWeight="Light"
+                               HorizontalContentAlignment="Center">
+                        </Label>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="20, 5, 5, 5">
+                                <Image Source="/Resources/true.png" Width="50"
+                                       Margin="5">
+
+                                </Image>
+                                <Label Content=""
+                                       x:Name="GoalsScoreBySeason1"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                                </Label>
+                            </StackPanel>
+                            <Label Content=":" Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   FontSize="26">
+
+                            </Label>
+                            <StackPanel Orientation="Horizontal" Margin="5, 5, 20, 5">
+                                <Label Content=""
+                                       x:Name="MissedGoalsBySeason1"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                                </Label>
+                                <Image Source="/Resources/false.png" Width="50"
+                                       Margin="5">
+
+                                </Image>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="5" Width="325">
+                    <Label Content="Найменша кількість пропущених голів"
+                           FontFamily="Arial"
+                           FontSize="16"
+                           Foreground="White"
+                           FontWeight="Light"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center">
+
+                    </Label>
+                    <StackPanel Background="Black" Opacity="0.5" Orientation="Vertical">
+                        <Label Content=""
+                               x:Name="TeamNameLabel2"
+                               Foreground="White"
+                               FontFamily="Arial"
+                               FontSize="14"
+                               FontWeight="Light"
+                               HorizontalContentAlignment="Center">
+                        </Label>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="20, 5, 5, 5">
+                                <Image Source="/Resources/true.png" Width="50"
+                                       Margin="5">
+
+                                </Image>
+                                <Label Content=""
+                                       x:Name="GoalsScoreBySeason2"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                                </Label>
+                            </StackPanel>
+                            <Label Content=":" Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   FontSize="26">
+
+                            </Label>
+                            <StackPanel Orientation="Horizontal" Margin="5, 5, 20, 5">
+                                <Label Content=""
+                                       x:Name="MissedGoalsBySeason2"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                                </Label>
+                                <Image Source="/Resources/false.png" Width="50"
+                                       Margin="5">
+
+                                </Image>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="5" Width="325">
+                    <Label Content="Голи / пропущені голи"
+                           FontFamily="Arial"
+                           FontSize="16"
+                           Foreground="White"
+                           FontWeight="Light"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           HorizontalContentAlignment="Center"
+                           VerticalContentAlignment="Center">
+
+                    </Label>
+                    <StackPanel Background="Black" Opacity="0.5" Orientation="Vertical">
+                        <Label Content=""
+                               x:Name="TeamNameLabel3"
+                               Foreground="White"
+                               FontFamily="Arial"
+                               FontSize="14"
+                               FontWeight="Light"
+                               HorizontalContentAlignment="Center">
+                        </Label>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" Margin="20, 5, 5, 5">
+                                <Image Source="/Resources/true.png" Width="50"
+                                       Margin="5">
+
+                                </Image>
+                                <Label Content=""
+                                       x:Name="GoalsScoreBySeason3"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                                </Label>
+                            </StackPanel>
+                            <Label Content=":" Foreground="White"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   FontSize="26">
+
+                            </Label>
+                            <StackPanel Orientation="Horizontal" Margin="5, 5, 20, 5">
+                                <Label Content=""
+                                       x:Name="MissedGoalsBySeason3"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                                </Label>
+                                <Image Source="/Resources/false.png" Width="50"
+                                       Margin="5">
+
+                                </Image>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Отримати статистику по всіх лігах (найкращий день)"
+                       FontFamily="Arial"
+                       FontSize="16"
+                       FontWeight="Light"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center">
+
+                </Label>
+                <Button Template="{DynamicResource RoundedButtonStyle}" 
+                        Content="Open Json File's"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Height="45"
+                        Width="150"
+                        Margin="10"
+                        Background="#7846f0"
+                        Foreground="White"
+                        FontFamily="Arial"
+                        FontWeight="Light"
+                        FontSize="16"
+                        Click="OpenJsonFileMulti">
+                </Button>
+
+                <StackPanel Background="Black" Opacity="0.5" Orientation="Vertical" Margin="10" Width="325">
+                    <Label Content=""
+                               x:Name="DayLabel"
+                               Foreground="White"
+                               FontFamily="Arial"
+                               FontSize="14"
+                               FontWeight="Light"
+                               HorizontalContentAlignment="Center">
+                    </Label>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Margin="20, 5, 5, 5">
+                            <Image Source="/Resources/true.png" Width="50"
+                                       Margin="5">
+
+                            </Image>
+                            <Label Content=""
+                                       x:Name="GoalsScoreByDay"
+                                       Width="60"
+                                       Foreground="White"
+                                       HorizontalContentAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalContentAlignment="Center"
+                                       FontSize="26">
+
+                            </Label>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
