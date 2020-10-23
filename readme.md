@@ -25,7 +25,7 @@
 
 ## Result
 
-![Some pictures](https://github.com/rochoMonsta/Football-team-statistics/tree/master/Results/result1.png)
+![Some pictures](https://github.com/rochoMonsta/Football-team-statistics/blob/master/Results/result1.PNG)
 
 ## Methods
 
